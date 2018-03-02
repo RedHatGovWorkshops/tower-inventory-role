@@ -1,0 +1,4 @@
+# file: roles/tower-inventory-role/vars/main.yml
+---
+#
+# foo: bar

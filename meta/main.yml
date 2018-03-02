@@ -1,0 +1,16 @@
+# file: roles/tower-inventory-role/meta/main.yml
+---
+galaxy_info:
+  author: Brad Sollar
+  description: Sync Tower Inventory from playbook
+  company: Red Hat
+  license: MIT
+  min_ansible_version: 1.9
+  platforms:
+  - name: EL
+    versions:
+    - all
+  galaxy_tags:
+    - tower
+    - inventory
+dependencies:
