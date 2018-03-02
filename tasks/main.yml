@@ -6,7 +6,7 @@
     description:       "{{ workshop_prefix }} inventory for Ansible Tower Workshop"
     organization:      "{{ tower_organization }}"
     state:              present
-    tower_config_file: "~/.tower_cli.cfg"
+    tower_config_file: "/etc/tower/tower_cli.cfg"
   
 - name: Create Inventory Instance Filters
   tower_group:
@@ -18,4 +18,4 @@
     instance_filters:  "tag:DeleteTag={{ workshop_prefix }}-{{ owner_email }}"
     state:              present      
     source:             ec2  
-    tower_config_file: "~/.tower_cli.cfg"
+    tower_config_file: "/etc/tower/tower_cli.cfg"
