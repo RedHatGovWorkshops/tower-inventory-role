@@ -11,6 +11,7 @@
 - name: Create Inventory Instance Filters
   tower_group:
     name:              "{{ workshop_prefix }}-group"
+    group_by:          "{{ workshop_prefix }}-group"
     credential:        "Public_Sector_Tower_AWS_API_KEY"
     description:       "{{ workshop_prefix }} inventory for Ansible Tower Workshop"
     inventory:         "{{ workshop_prefix }}-inventory"
