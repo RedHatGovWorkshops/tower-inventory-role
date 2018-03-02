@@ -8,7 +8,7 @@
     state:              present
     tower_username:    "{{ local_tower_username }}"
     tower_password:    "{{ local_tower_password }}"
-    tower_host:        localhost
+    tower_host:        "https://35.168.190.144/"
     tower_config_file: "~/.tower_cli.cfg"
   
 - name: Create Inventory Instance Filters
