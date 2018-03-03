@@ -1,21 +1,39 @@
 # file: roles/tower-inventory-role/tasks/main.yml
 ---
-- name: Add tower inventory
-  tower_inventory:
-    name:              "{{ workshop_prefix }}-inventory"
-    description:       "{{ workshop_prefix }} inventory for Ansible Tower Workshop"
-    organization:      "{{ tower_organization }}"
-    state:              present
-    tower_config_file: "~/.tower_cli.cfg"
+# - name: Add tower inventory
+#   tower_inventory:
+#     name:              "{{ workshop_prefix }}-inventory"
+#     description:       "{{ workshop_prefix }} inventory for Ansible Tower Workshop"
+#     organization:      "{{ tower_organization }}"
+#     state:              present
+#     tower_config_file: "~/.tower_cli.cfg"
   
-- name: Create Inventory Instance Filters
-  tower_group:
-    name:              "{{ workshop_prefix }}-group"
-    group_by:          "{{ workshop_prefix }}-group"
-    credential:        "Public_Sector_Tower_AWS_API_KEY"
-    description:       "{{ workshop_prefix }} inventory for Ansible Tower Workshop"
-    inventory:         "{{ workshop_prefix }}-inventory"
-    instance_filters:  "tag:DeleteTag={{ workshop_prefix }}-{{ owner_email }}"
-    state:              present      
-    source:             ec2  
-    tower_config_file: "~/.tower_cli.cfg"
+# - name: Create Inventory Instance Filters
+#   tower_group:
+#     name:              "{{ workshop_prefix }}-group"
+#     group_by:          "{{ workshop_prefix }}-group"
+#     credential:        "Public_Sector_Tower_AWS_API_KEY"
+#     description:       "{{ workshop_prefix }} inventory for Ansible Tower Workshop"
+#     inventory:         "{{ workshop_prefix }}-inventory"
+#     instance_filters:  "tag:DeleteTag={{ workshop_prefix }}-{{ owner_email }}"
+#     state:              present      
+#     source:             ec2  
+#     tower_config_file: "~/.tower_cli.cfg"
+
+- name: Add tower inventory
+  command: tower-cli inventory create --tower-host public.sector.tower.redhatgov.io \
+                                      --tower-username  {{ tower_username }} \
+                                      --tower-password  {{ tower_password }} \
+                                      --name            {{ workshop_prefix }}-inventory \
+                                      --description     {{ workshop_prefix }}-inventory \
+                                      --organization    {{ tower_organization }}
+
+- name: Create Inventory Instance Filters                                   
+  command: tower-cli inventory create --tower-host public.sector.tower.redhatgov.io \
+                                      --tower-username  {{ tower_username }} \
+                                      --tower-password  {{ tower_password }} \
+                                      --name            {{ workshop_prefix }}-instance-filter \
+                                      --inventory       {{ workshop_prefix }}-inventory \
+                                      --source             ec2 \
+                                      --credential      {{ aws_credential }} \
+                                      --instance-filters "tag:DeleteTag={{ workshop_prefix }}-{{ owner_email }}"
