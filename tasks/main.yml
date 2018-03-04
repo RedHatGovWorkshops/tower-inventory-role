@@ -29,11 +29,11 @@
                                       --organization    {{ tower_organization }}
 
 - name: Create Inventory Instance Filters                                   
-  command: tower-cli inventory create --tower-host public.sector.tower.redhatgov.io \
-                                      --tower-username  {{ tower_username }} \
-                                      --tower-password  {{ tower_password }} \
-                                      --name            {{ workshop_prefix }}-instance-filter \
-                                      --inventory       {{ workshop_prefix }}-inventory \
-                                      --source             ec2 \
-                                      --credential      {{ aws_credential }} \
-                                      --instance-filters "tag:DeleteTag={{ workshop_prefix }}-{{ owner_email }}"
+  command: tower-cli inventory_source create --tower-host public.sector.tower.redhatgov.io \
+                                             --tower-username  {{ tower_username }} \
+                                             --tower-password  {{ tower_password }} \
+                                             --name            {{ workshop_prefix }}-instance-filter \
+                                             --inventory       {{ workshop_prefix }}-inventory \
+                                             --source             ec2 \
+                                             --credential      {{ aws_credential }} \
+                                             --instance-filters "tag:DeleteTag={{ workshop_prefix }}-{{ owner_email }}"
