@@ -37,6 +37,12 @@
                                              --source             ec2 \
                                              --credential      {{ aws_credential }} \
                                              --instance-filters "tag:DeleteTag={{ workshop_prefix }}-{{ owner_email }}"
+- name: Create Group
+  command: tower-cli group create --tower-host public.sector.tower.redhatgov.io \
+                                  --tower-username   {{ tower_username }} \
+                                  --tower-password   {{ tower_password }} \
+                                  --name             {{ workshop_prefix }}-group \
+                                  --inventory        {{ workshop_prefix }}-inventory
 
 - name: Update Inventory
   command: tower-cli inventory batch_update --tower-host public.sector.tower.redhatgov.io \
