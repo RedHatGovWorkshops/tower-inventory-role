@@ -37,3 +37,4 @@
                                              --source             ec2 \
                                              --credential      {{ aws_credential }} \
                                              --instance-filters "tag:DeleteTag={{ workshop_prefix }}-{{ owner_email }}"
+                                             --update-on-project-update true
