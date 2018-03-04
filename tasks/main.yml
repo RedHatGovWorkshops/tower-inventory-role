@@ -39,9 +39,9 @@
                                              --instance-filters "tag:DeleteTag={{ workshop_prefix }}-{{ owner_email }}"
 
 - name: Update Inventory
-  command: tower-cli inventory_update --tower-host public.sector.tower.redhatgov.io \
-                                      --tower-username   {{ tower_username }} \
-                                      --tower-password   {{ tower_password }} \
-                                      --name             {{ workshop_prefix }}-inventory \
-                                      --inventory-source {{ workshop_prefix }}-instance-filter \
-                                      --launch-type sync
+  command: tower-cli inventory_update get --tower-host public.sector.tower.redhatgov.io \
+                                          --tower-username   {{ tower_username }} \
+                                          --tower-password   {{ tower_password }} \
+                                          --name             {{ workshop_prefix }}-inventory \
+                                          --inventory-source {{ workshop_prefix }}-instance-filter \
+                                          --launch-type sync
