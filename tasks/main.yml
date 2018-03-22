@@ -32,8 +32,9 @@
                                             --name             {{ workshop_prefix }}-inventory \
                                             --organization     {{ tower_organization }}
 
-
-
+- name: Pause yo.
+  pause: 
+    seconds: 30
 
 
 
